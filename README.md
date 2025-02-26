@@ -52,3 +52,8 @@ for item in items:
     for operation in part.route:
       print(operation.name, operation.arrived_at, operation.started_at, operation.completed_at)
 ```
+
+
+## TODO
+- [ ] Implement priority rules.
+- [ ] Use tree structure in Item.project_diagram
