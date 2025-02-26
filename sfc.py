@@ -57,6 +57,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class Operation:
+    '''An operation represents on operation on a Part at a WorkCenter.'''
     name: str
     work_center_id: int
     run_time: float
@@ -118,6 +119,7 @@ class Operation:
 
 @dataclass
 class Part:
+    '''A Part represents a part or a sub-component of an Item (final product).'''
     route: List[Operation]
     current_operation_index: int = 0
     ID: int = INT_NOT_SET
@@ -151,6 +153,7 @@ class Part:
 
 @dataclass
 class Item:
+    '''An Item represent a final product manufactured.'''
     ID: int
     # For simplicity, we assume that the product structure diagram is just one path.
     project_diagram: List[Part]
@@ -192,12 +195,19 @@ class Item:
 
 @dataclass
 class WorkCenter:
+    """A WorkCenter represents some part of the shop floor where an Operation on a Part happens.
+    
+    Only one part can be worked on at each time.
+    All other parts at the WorkStation are in its queue.
+    Parts are picked from the queue according to its priority_rule.
+    """
     ID: int
     priority_rule: PriorityRules = "first_in_first_out"
     queue: "PriorityQueue" = field(default_factory=lambda: PriorityQueue())
     is_busy: bool = False
     in_operation_counter: "Counter" = field(default_factory=lambda: Counter())
     queue_counter: "Counter" = field(default_factory=lambda: Counter())
+    setup_counter: "Counter" = field(default_factory=lambda: Counter())
 
     def next_job(self) -> Optional["PrioritizedOperation"]:
         if self.queue.is_empty():
@@ -418,10 +428,15 @@ class DiscreteEventSimulator:
             f"Trying to start {operation.name} when work center {work_center.ID} is busy"
         )
         logger.debug(f"{time} start: {operation.name}")
-        operation.started_at = time
-        work_center.queue_counter.down(time, f"left queue {operation.name}")
-        work_center.in_operation_counter.up(time, f"start {operation.name}")
+        # Update states:
+        work_center.setup_counter.up(time)
+        start_time = time + operation.setup_time
+        work_center.setup_counter.up(start_time)
+        operation.started_at = start_time
+        work_center.queue_counter.down(start_time, f"left queue {operation.name}")
+        work_center.in_operation_counter.up(start_time, f"start {operation.name}")
         work_center.is_busy = True
+        # Schedule depart event:
         depart_event = Event(
             type="depart",
             work_center=work_center,
