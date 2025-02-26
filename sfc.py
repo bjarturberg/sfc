@@ -402,6 +402,7 @@ class DiscreteEventSimulator:
             else:
                 assert_never(event.type)
                 raise ValueError(f"Unknown event type {event.type}")
+            time = event.time
 
     def handle_arrival(self, event: Event):
         event_type, time, work_center, item, part_idx, priority = event
