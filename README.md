@@ -56,4 +56,5 @@ for item in items:
 
 ## TODO
 - [ ] Implement priority rules.
-- [ ] Use tree structure in Item.project_diagram
+- [ ] Use tree structure in Item.project_diagram.
+- [ ] Add batch size.
