@@ -38,7 +38,7 @@ PriorityRules = Literal[
     "shortest_processing_time",  # SPT
     "earliest_due_date",  # EDD
     "order_slack",  # ST, slack time
-    "slack_per_operaiton",  # ST/O slack time per operation
+    "slack_per_operation",  # ST/O slack time per operation
     "critical_ratio",  # CR
     "shortest_operation_next",
     "random",
@@ -226,11 +226,9 @@ class WorkCenter:
             return item.due_date
         if priority_rule == "order_slack":
             raise NotImplementedError
-        if priority_rule == "slack_per_operaiton":
+        if priority_rule == "slack_per_operation":
             raise NotImplementedError
         if priority_rule == "critical_ratio":
-            raise NotImplementedError
-        if priority_rule == "shortest_operation_next":
             raise NotImplementedError
         if priority_rule == "shortest_operation_next":
             raise NotImplementedError
