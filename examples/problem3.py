@@ -14,13 +14,17 @@ def a():
     items = []
     for i, (name, time, total_time, n_ops, due_date) in enumerate(data):
         operation = Operation(
-            name=name, run_time=float(time), work_center_id=work_center.ID
+            name=name,
+            run_time_per_unit=float(time),
+            batch_size=1,
+            work_center_id=work_center.ID,
         )
         avg_time_left = (total_time - time) / (n_ops - 1)
         other_operatins = [
             Operation(
                 name=f"{name}-{i}",
-                run_time=float(avg_time_left),
+                run_time_per_unit=float(avg_time_left),
+                batch_size=1,
                 work_center_id=other_work_center.ID,
             )
             for i in range(n_ops - 1)
@@ -61,13 +65,17 @@ def b():
     items = []
     for i, (name, time, total_time, n_ops, due_date) in enumerate(data):
         operation = Operation(
-            name=name, run_time=float(time), work_center_id=work_center.ID
+            name=name,
+            run_time_per_unit=float(time),
+            batch_size=1,
+            work_center_id=work_center.ID,
         )
         avg_time_left = (total_time - time) / (n_ops - 1)
         other_operations = [
             Operation(
                 name=f"{name}-{i}",
-                run_time=float(avg_time_left),
+                run_time_per_unit=float(avg_time_left),
+                batch_size=1,
                 work_center_id=other_work_center.ID,
             )
             for i in range(n_ops - 1)

@@ -81,7 +81,7 @@ class Operation:
     @property
     def run_time(self) -> float:
         return self.batch_size * self.run_time_per_unit
-
+    
     def is_completed(self) -> bool:
         return self.completed_at != TIME_NOT_SET
 

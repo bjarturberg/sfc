@@ -25,7 +25,8 @@ items = [
                     Operation(
                         name=name,
                         work_center_id=work_center.ID,
-                        run_time=float(run_time),
+                        run_time_per_unit=float(run_time),
+                        batch_size=1,
                     )
                 ]
             )
