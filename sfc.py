@@ -484,6 +484,7 @@ class DiscreteEventSimulator:
         # Update item state:
         if not item.has_next_operation(part_idx):
             return
+        # There are more operations to schedule
         next_part_idx = item.next_part_idx(part_idx)
         next_operation = item.get_part_by_idx(next_part_idx).current_operation()
         next_work_center = self.work_centers_by_id[next_operation.work_center_id]
@@ -505,7 +506,7 @@ class DiscreteEventSimulator:
 
 
 # HELPERS:
-def tabulate(table: list[list[int | float | str]], column_names: list[str]):
+def tabulate(table: List[List[int | float | str]], column_names: List[str]):
     """
     Prints a formatted table.
 
