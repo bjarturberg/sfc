@@ -60,7 +60,9 @@ class Operation:
     '''An operation represents on operation on a Part at a WorkCenter.'''
     name: str
     work_center_id: int
-    run_time: float
+    run_time_per_unit: float
+    batch_size: int
+    # run_time: float
     setup_time: float = 0.0
     move_time: float = 0.0
     predicted_queue_time: float = 0.0
@@ -72,8 +74,13 @@ class Operation:
     arrived_at: float = TIME_NOT_SET
     started_at: float = TIME_NOT_SET
     completed_at: float = TIME_NOT_SET
+    setup_required: bool = True
 
     ID: int = INT_NOT_SET  # unique identifier
+
+    @property
+    def run_time(self) -> float:
+        return self.batch_size * self.run_time_per_unit
 
     def is_completed(self) -> bool:
         return self.completed_at != TIME_NOT_SET
@@ -208,6 +215,7 @@ class WorkCenter:
     in_operation_counter: "Counter" = field(default_factory=lambda: Counter())
     queue_counter: "Counter" = field(default_factory=lambda: Counter())
     setup_counter: "Counter" = field(default_factory=lambda: Counter())
+    current_setup_id: int = INT_NOT_SET
 
     def next_job(self) -> Optional["PrioritizedOperation"]:
         if self.queue.is_empty():
@@ -429,8 +437,14 @@ class DiscreteEventSimulator:
         logger.debug(f"{time} start: {operation.name}")
         # Update states:
         work_center.setup_counter.up(time)
-        start_time = time + operation.setup_time
-        work_center.setup_counter.up(start_time)
+        if work_center.current_setup_id == operation.ID:
+            start_time = time
+            operation.setup_required = False
+        else:
+            start_time = time + operation.setup_time
+            operation.setup_required = True
+        work_center.current_setup_id = operation.ID
+        work_center.setup_counter.down(start_time)
         operation.started_at = start_time
         work_center.queue_counter.down(start_time, f"left queue {operation.name}")
         work_center.in_operation_counter.up(start_time, f"start {operation.name}")
@@ -441,7 +455,7 @@ class DiscreteEventSimulator:
             work_center=work_center,
             item=item,
             part_idx=part_idx,
-            time=time + operation.cycle_time(),
+            time=start_time + operation.run_time,
             priority=HIGHEST_PRIORITY,
         )
         self.schedule_event(depart_event)
