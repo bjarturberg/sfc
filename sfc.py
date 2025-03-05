@@ -228,6 +228,13 @@ class Item:
         """Check whether this part of the item has any operation left."""
         next_part_idx = self.next_part_idx(part_idx)
         return next_part_idx < len(self.project_diagram)
+    
+
+def order_slack(operations: list[Operation], due_date: float) -> float:
+    total_cycle_time_left = sum(op.cycle_time() for op in operations)
+    return due_date - total_cycle_time_left
+
+
 
 
 @dataclass
@@ -263,7 +270,7 @@ class WorkCenter:
         if priority_rule == "earliest_due_date":
             return item.due_date
         if priority_rule == "order_slack":
-            raise NotImplementedError
+            return order_slack(item.operations_left(), item.due_date)
         if priority_rule == "slack_per_operation":
             raise NotImplementedError
         if priority_rule == "critical_ratio":
