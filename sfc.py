@@ -118,7 +118,7 @@ class Operation:
     def cycle_time(self) -> float:
         return self.setup_time + self.run_time
     
-    def predicted_total_time(self) -> float:
+    def predicted_lead_time(self) -> float:
         return self.predicted_queue_time + self.non_queue_time()
 
     def completion_time(self) -> float:
@@ -159,7 +159,7 @@ class Part:
         return self.route[self.current_operation_index :]
 
     def predicted_total_time(self) -> float:
-        return sum(operation.predicted_total_time() for operation in self.route)
+        return sum(operation.predicted_lead_time() for operation in self.route)
 
     def is_completed(self) -> bool:
         return all(op.is_completed() for op in self.route)
@@ -174,7 +174,7 @@ class Part:
     
     def non_queue_time(self) -> float:
         return sum(op.non_queue_time() for op in self.route)
-
+    
     def n_operations_left(self) -> int:
         return len(self.route) - self.current_operation_index
 
@@ -201,6 +201,9 @@ class Item:
     
     def non_queue_time(self) -> float:
         return sum(part.non_queue_time() for part in self.project_diagram)
+    
+    def operations_left(self) -> list[Operation]:
+        return [op for part in self.project_diagram for op in part.operations_left()]
 
     def lateness(self) -> float:
         if not self.is_completed():
