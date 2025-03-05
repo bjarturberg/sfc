@@ -57,7 +57,28 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class Operation:
-    '''An operation represents on operation on a Part at a WorkCenter.'''
+    '''An operation represents an operation on a Part at a WorkCenter.
+    
+    Each operation has three fields that indicate the duration of the operation:
+      - setup_time: the time required to prepare for this type of operation.
+        The operation type is determined by its ID;
+      - run_time_per_unit: the time required to perform the operation on one unit;
+      - move_time: the time it takes to move the part to the next work station.
+    
+    Each operation also has three timestamps:
+      - arrived_at: records when the part arrives at the work station
+        that handles this operation;
+      - started_at: records when the operation is started;
+      - completed_at: records when the operation is finished.
+
+    The relationship between the duration fields and the timestamps is:
+
+    time:   |  queue_time       | batch_size * run_time_per_unit | move_time |
+                   | setup_time |
+            ^                   ^                                ^
+            |                   |                                |
+        arrived_at          started_at                      completed_at
+    '''
     name: str
     work_center_id: int
     run_time_per_unit: float
