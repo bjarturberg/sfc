@@ -35,8 +35,9 @@ def order_generator(
     create_product_item: ProductFunction,
     avg_interarrival_time: float,
     mean_batch_size: int,
+    N_orders: int,
     start_time: float = 0.0,
-) -> Generator[Item, None, None]:
+) -> List[Item]:
     """Generate orders.
 
     Parameters
@@ -54,7 +55,8 @@ def order_generator(
     current_time = start_time
 
     item_id = start_item_id
-    while True:
+    orders = []
+    for i in range(N_orders):
         interarrival_time = generate_interarrival_time(avg_interarrival_time)
         current_time += interarrival_time
 
@@ -63,13 +65,16 @@ def order_generator(
             create_product_item, batch_size=batch_size, order_release=current_time
         )
 
-        yield create_product_item(
+        order = create_product_item(
             item_id=item_id,
             order_release=current_time,
             due_date=due_date,
             batch_size=batch_size,
         )
         item_id += 1
+        orders.append(order)
+        
+    return orders
 
 
 def gen_due_date(
@@ -87,7 +92,7 @@ def gen_due_date(
 
 
 def gen_batch_size(mean_batch_size: int, min_batch_size: int = 1) -> int:
-    random_batch_size = mean_batch_size  # TODO: implement random_batch_size
+    random_batch_size = mean_batch_size  # TODO: implement random_batch_size, mean er ekki random
     return max(min_batch_size, random_batch_size)
 
 
@@ -182,7 +187,7 @@ def create_bread(
 
 
 def example_simulate_data(
-    until: float, priority_rule_by_work_center_id: Dict[int, PriorityRules]
+    priority_rule_by_work_center_id: Dict[int, PriorityRules]
 ) -> Tuple[List[WorkCenter], List[Item]]:
     """Example simulation of bread baking.
     
@@ -206,6 +211,7 @@ def example_simulate_data(
             create_bread,  # 1. a function that creates one item of the product.
             bread_avg_batch_size,
             bread_avg_interarrival_time
+            100 # N_orders
         ],
         # add more products here:
         # [
@@ -221,17 +227,20 @@ def example_simulate_data(
     start_time = 0.0
     all_orders = []
     item_id = 0
-    for product_function, mean_batch_size, avg_interarrival_time in production_information:
-        product_generator = order_generator(
-            item_id, product_function, avg_interarrival_time, mean_batch_size, start_time
+    for product_function, mean_batch_size, avg_interarrival_time, N_oders in production_information:
+         product_orders = order_generator(
+            item_id, product_function, avg_interarrival_time, mean_batch_size, N_orders, start_time
         )
-        last_order_release = 0.0
-        assert last_order_release < until
-        while last_order_release < until:
-            item = next(product_generator)
-            all_orders.append(item)
-            last_order_release = item.order_release
-        item_id = item.ID + 1  # type: ignore
+        all_orders.extend(product_orders)
+        item_id = product.orders[-1].ID + 1
+
+        #last_order_release = 0.0
+        #assert last_order_release < until
+        #while last_order_release < until:
+        #    item = next(product_generator)
+        #    all_orders.append(item)
+        #    last_order_release = item.order_release
+        #item_id = item.ID + 1  # type: ignore
 
     
     work_centers = [
@@ -246,14 +255,18 @@ def example_simulate_data(
 
 
 if __name__ == "__main__":
-    gen_data_until = 1e6
-    sim_until = 1e8
     work_centers, items = example_simulate_data(
-        until=gen_data_until,
         priority_rule_by_work_center_id={i: "first_in_first_out" for i in range(1, 6)},
     )
     work_center_ids_in_items = set(op.work_center_id for item in items for op in item.all_operations())
     work_center_ids = set(wc.ID for wc in work_centers)
     assert work_center_ids_in_items == work_center_ids
     sim = DiscreteEventSimulator(work_centers, items)
-    sim.run(sim_until)
+    until = items[-1].order_release + 10000
+    until = le100
+    sim.run(until)
+    from chart import gantt_chart
+    sorted_items = sorted(items, key=lambda i.order_release)
+    items_to_plot = [sorted_items[10:15]
+    fig, _ = gantt_chart(items_to_plot)
+    fig.savefig('bread.png')
