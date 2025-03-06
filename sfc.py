@@ -202,6 +202,9 @@ class Item:
     def non_queue_time(self) -> float:
         return sum(part.non_queue_time() for part in self.project_diagram)
     
+    def all_operations(self) -> List[Operation]:
+        return [op for part in self.project_diagram for op in part.route]
+    
     def operations_left(self) -> list[Operation]:
         return [op for part in self.project_diagram for op in part.operations_left()]
 
