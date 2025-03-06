@@ -80,6 +80,6 @@ def simulation_chart(items: list[Item], work_centers: list[WorkCenter]):
 
 
 if __name__ == '__main__':
-    path = 'path/to/h3_gantt_data.json'
+    path = '/content/sfc/h3_gantt_data.json'
     items = load_gantt_data(path)
     work_centers = load_work_centers(path)
