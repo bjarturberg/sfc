@@ -1,0 +1,16 @@
+product_id,product_name,part_index,part_name,operation_index,work_center_name,work_center_id,operation_name,operation_id,setup_time,run_time_per_unit,move_time
+1,Steel Bracket Assembly,0,Bracket Plate,0,Cutting & Bending Station,1,Cutting,6,20,5,3
+1,Steel Bracket Assembly,0,Bracket Plate,1,Machining & Drilling Station,2,Machining,3,25,7,4
+1,Steel Bracket Assembly,0,Bracket Plate,2,Coating & Painting Station,3,Coating,4,30,6,5
+2,Aluminum Enclosure,0,Front Panel,0,Cutting & Bending Station,1,Cutting,6,20,4,2
+2,Aluminum Enclosure,0,Front Panel,1,Machining & Drilling Station,2,Machining,3,25,6,3
+2,Aluminum Enclosure,0,Front Panel,2,Coating & Painting Station,3,Painting,2,25,5,4
+3,Stainless Steel Conveyor,0,Side Rail,0,Cutting & Bending Station,1,Cutting,6,20,5,3
+3,Stainless Steel Conveyor,0,Side Rail,1,Machining & Drilling Station,2,Machining,3,25,7,4
+3,Stainless Steel Conveyor,0,Side Rail,2,Welding & Grinding Station,4,Welding,1,40,10,6
+4,Sheet Metal Cabinet,0,Cabinet Body,0,Cutting & Bending Station,1,Cutting,6,20,6,3
+4,Sheet Metal Cabinet,0,Cabinet Body,1,Cutting & Bending Station,1,Bending,5,5,8,2
+4,Sheet Metal Cabinet,0,Cabinet Body,2,Welding & Grinding Station,4,Welding,1,40,15,6
+5,Motor Mounting Base,0,Base Plate,0,Cutting & Bending Station,1,Cutting,6,20,6,3
+5,Motor Mounting Base,0,Base Plate,1,Machining & Drilling Station,2,Machining,3,25,9,4
+5,Motor Mounting Base,0,Base Plate,2,Coating & Painting Station,3,Painting,2,25,6,5

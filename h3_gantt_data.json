@@ -1,0 +1,279 @@
+{
+  "items": [
+    {
+      "ID": 0,
+      "project_diagram": [
+        {
+          "route": [
+            {
+              "name": "Item 0 - Part 0 - 0",
+              "work_center_id": 3,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 0.0,
+              "predicted_queue_time": 0.0,
+              "priority": 0.0,
+              "arrived_at": 0.0,
+              "started_at": 30.0,
+              "completed_at": 130.0,
+              "setup_required": true,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        },
+        {
+          "route": [
+            {
+              "name": "Item 0 - Part 1 - 0",
+              "work_center_id": 2,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 16,
+              "predicted_queue_time": 0.0,
+              "priority": 100,
+              "arrived_at": 130.0,
+              "started_at": 230.0,
+              "completed_at": 330.0,
+              "setup_required": false,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        }
+      ],
+      "due_date": 10000.0,
+      "order_release": 0.0
+    },
+    {
+      "ID": 4,
+      "project_diagram": [
+        {
+          "route": [
+            {
+              "name": "Item 4 - Part 0 - 0",
+              "work_center_id": 2,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 16,
+              "predicted_queue_time": 0.0,
+              "priority": 100,
+              "arrived_at": 0.0,
+              "started_at": 30.0,
+              "completed_at": 130.0,
+              "setup_required": true,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        },
+        {
+          "route": [
+            {
+              "name": "Item 4 - Part 1 - 0",
+              "work_center_id": 3,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 16,
+              "predicted_queue_time": 0.0,
+              "priority": 146.0,
+              "arrived_at": 146.0,
+              "started_at": 355.0,
+              "completed_at": 455.0,
+              "setup_required": true,
+              "ID": 1
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        }
+      ],
+      "due_date": 10000.0,
+      "order_release": 0.0
+    },
+    {
+      "ID": 3,
+      "project_diagram": [
+        {
+          "route": [
+            {
+              "name": "Item 3 - Part 0 - 0",
+              "work_center_id": 2,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 16,
+              "predicted_queue_time": 0.0,
+              "priority": 100,
+              "arrived_at": 0.0,
+              "started_at": 130.0,
+              "completed_at": 230.0,
+              "setup_required": false,
+              "ID": 0
+            },
+            {
+              "name": "Item 3 - Part 0 - 1",
+              "work_center_id": 2,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 0.0,
+              "predicted_queue_time": 0.0,
+              "priority": 100,
+              "arrived_at": 246.0,
+              "started_at": 330.0,
+              "completed_at": 430.0,
+              "setup_required": false,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 2,
+          "ID": -1
+        },
+        {
+          "route": [
+            {
+              "name": "Item 3 - Part 1 - 0",
+              "work_center_id": 1,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 0.0,
+              "predicted_queue_time": 0.0,
+              "priority": 430.0,
+              "arrived_at": 430.0,
+              "started_at": 430.0,
+              "completed_at": 530.0,
+              "setup_required": false,
+              "ID": 0
+            },
+            {
+              "name": "Item 3 - Part 1 - 1",
+              "work_center_id": 1,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 16,
+              "predicted_queue_time": 0.0,
+              "priority": 530.0,
+              "arrived_at": 530.0,
+              "started_at": 530.0,
+              "completed_at": 630.0,
+              "setup_required": false,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 2,
+          "ID": -1
+        }
+      ],
+      "due_date": 10000.0,
+      "order_release": 0.0
+    },
+    {
+      "ID": 2,
+      "project_diagram": [
+        {
+          "route": [
+            {
+              "name": "Item 2 - Part 0 - 0",
+              "work_center_id": 3,
+              "run_time_per_unit": 1,
+              "batch_size": 50,
+              "setup_time": 15,
+              "move_time": 8,
+              "predicted_queue_time": 0.0,
+              "priority": 0.0,
+              "arrived_at": 0.0,
+              "started_at": 145.0,
+              "completed_at": 195.0,
+              "setup_required": true,
+              "ID": 1
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        },
+        {
+          "route": [
+            {
+              "name": "Item 2 - Part 1 - 0",
+              "work_center_id": 1,
+              "run_time_per_unit": 1,
+              "batch_size": 50,
+              "setup_time": 15,
+              "move_time": 8,
+              "predicted_queue_time": 0.0,
+              "priority": 203.0,
+              "arrived_at": 203.0,
+              "started_at": 218.0,
+              "completed_at": 268.0,
+              "setup_required": true,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        }
+      ],
+      "due_date": 10000.0,
+      "order_release": 0.0
+    },
+    {
+      "ID": 1,
+      "project_diagram": [
+        {
+          "route": [
+            {
+              "name": "Item 1 - Part 0 - 0",
+              "work_center_id": 3,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 0.0,
+              "predicted_queue_time": 0.0,
+              "priority": 0.0,
+              "arrived_at": 0.0,
+              "started_at": 225.0,
+              "completed_at": 325.0,
+              "setup_required": true,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        },
+        {
+          "route": [
+            {
+              "name": "Item 1 - Part 1 - 0",
+              "work_center_id": 2,
+              "run_time_per_unit": 2,
+              "batch_size": 50,
+              "setup_time": 30,
+              "move_time": 16,
+              "predicted_queue_time": 0.0,
+              "priority": 100,
+              "arrived_at": 325.0,
+              "started_at": 430.0,
+              "completed_at": 530.0,
+              "setup_required": false,
+              "ID": 0
+            }
+          ],
+          "current_operation_index": 1,
+          "ID": -1
+        }
+      ],
+      "due_date": 10000.0,
+      "order_release": 0.0
+    }
+  ]
+}
